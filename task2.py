@@ -2,7 +2,6 @@ from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
 import pylab
-from scipy.constants import pi
 from mpl_toolkits.mplot3d import axes3d
 
 
@@ -81,7 +80,7 @@ class poisson:
                 
                 for j in range(self.m):
                     
-                    AFourier[j,i] = 400./(pi*(2*k+1))*(np.cosh(pi/self.n*(2*k+1)*i) - 1/np.tanh(pi*(2*k+1))*np.sinh(pi/self.n*(2*k+1)*i))*np.sin(pi/self.m*(2*k+1)*j)
+                    AFourier[j,i] = 400./(np.pi*(2*k+1))*(np.cosh(np.pi/self.n*(2*k+1)*i) - 1/np.tanh(np.pi*(2*k+1))*np.sinh(np.pi/self.n*(2*k+1)*i))*np.sin(np.pi/self.m*(2*k+1)*j)
                     
             A = A + AFourier
             
@@ -107,7 +106,7 @@ class poisson:
         
         for i in range(self.ir):
             
-            B = 0.25*( A[0:-2,1:-1] + A[1:-1,0:-2] + A[1:-1,2:] + A[2:,1:-1])+pi*self.dp[1:-1,1:-1]*self.c**2
+            B = 0.25*( A[0:-2,1:-1] + A[1:-1,0:-2] + A[1:-1,2:] + A[2:,1:-1]) + np.pi*self.dp[1:-1,1:-1]*self.c**2
             
             A[1:-1,1:-1] = B
         
@@ -141,7 +140,7 @@ class poisson:
                 
                 for j in range(self.n-2):
                     
-                    A[i+1,j+1]=0.25*(A[i,j+1]+A[i+1,j]+A[i+1,j+2]+A[i+2,j+1])+pi*self.dp[i+1,j+1]*self.c**2
+                    A[i+1,j+1]=0.25*(A[i,j+1]+A[i+1,j]+A[i+1,j+2]+A[i+2,j+1]) + np.pi*self.dp[i+1,j+1]*self.c**2
                     
             Sp2 = np.trace(A)
             
@@ -179,7 +178,7 @@ class poisson:
                 
                 Sp1 = np.trace(A)
                 
-                B = 0.25*( A[0:-2,1:-1] + A[1:-1,0:-2] + A[1:-1,2:] + A[2:,1:-1])+pi*self.dp[1:-1,1:-1]*self.c**2
+                B = 0.25*( A[0:-2,1:-1] + A[1:-1,0:-2] + A[1:-1,2:] + A[2:,1:-1]) + np.pi*self.dp[1:-1,1:-1]*self.c**2
                 
                 R[1:-1,1:-1] = B-A[1:-1,1:-1]
                 

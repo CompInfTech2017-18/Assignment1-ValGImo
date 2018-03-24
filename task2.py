@@ -258,7 +258,7 @@ w = 1.0
 
 plotter = VolPlotter('LaplasGZ', 'x', 'y')    
         
-solveGZ = poisson(a,b,1,pp,5000,lem,rem,upm,dnm,0.01,plotter)
+solveGZ = poisson(a,b,1,mxp,5000,lem,rem,upm,dnm,0.01,plotter)
 
 Z2=solveGZ.Gauss()
 

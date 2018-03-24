@@ -65,7 +65,7 @@ class poisson:
         
         
         
-    def Analitic(self, amount):
+    def standart(self, amount):
         
         x = np.linspace(0.,self.n*self.c,self.n)
         
@@ -269,7 +269,7 @@ plotter = VolPlotter('standart', 'x', 'y')
 
 solveL = poisson(a,b,1,mxp,10000,lem,rem,upm,dnm,0.01,plotter)
 
-Z0 = solveL.Analitic(100)
+Z0 = solveL.standart(100)
 
 plotter.show()
 

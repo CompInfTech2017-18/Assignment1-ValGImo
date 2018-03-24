@@ -337,7 +337,7 @@ ex = field.EX()
 plotter.show()
 
 
-plotter = VolPlotter('EX', 'x', 'y')
+plotter = VolPlotter('EY', 'x', 'y')
 
 field = fd(a,b,Z4,1,plotter)
 

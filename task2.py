@@ -186,7 +186,7 @@ class poisson:
                 
                 Sp2 = np.trace(A)
                 
-                delta = np.absolute(Sp2-Sp1)
+                delta = np.abs(Sp2-Sp1)
                 
                 k = i
                 

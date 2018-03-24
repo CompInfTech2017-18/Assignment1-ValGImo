@@ -28,7 +28,7 @@ class VolPlotter:
         
         CS = plt.contour(x,y,matrix,colors = ('indigo','purple','b','m','violet','aqua'), linewidths = 1.1)
         
-        return self.ax.plot_surface(x, y, matrix, color = 'r', linewidth = 0.4)
+        return self.ax.plot_surface(x, y, matrix, alpha = 0.6, color = 'r', linewidth = 0.4)
     
     
 

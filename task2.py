@@ -73,7 +73,7 @@ class poisson:
         
         A = np.zeros((self.m, self.n))
         
-        Ak = np.zeros((self.m, self.n))
+        AFourier = np.zeros((self.m, self.n))
         
         for k in range(amount):
             
@@ -81,9 +81,9 @@ class poisson:
                 
                 for j in range(self.m):
                     
-                    Ak[j,i] = 400./(pi*(2*k+1))*(np.cosh(pi/self.n*(2*k+1)*i) - 1/np.tanh(pi*(2*k+1))*np.sinh(pi/self.n*(2*k+1)*i))*np.sin(pi/self.m*(2*k+1)*j)
+                    AFourier[j,i] = 400./(pi*(2*k+1))*(np.cosh(pi/self.n*(2*k+1)*i) - 1/np.tanh(pi*(2*k+1))*np.sinh(pi/self.n*(2*k+1)*i))*np.sin(pi/self.m*(2*k+1)*j)
                     
-            A = A + Ak
+            A = A + AFourier
             
         plotter.plot(x,y,A)
         

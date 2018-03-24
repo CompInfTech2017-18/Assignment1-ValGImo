@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pylab
 from mpl_toolkits.mplot3d import axes3d
-
+import matplotlib.cm as cm
 
 
         
@@ -28,7 +28,7 @@ class VolPlotter:
         
         CS = plt.contour(x,y,matrix,colors = ('indigo','purple','b','m','violet','aqua'), linewidths = 1.1)
         
-        return self.ax.plot_surface(x, y, matrix, alpha = 0.6, color = 'r', linewidth = 0.4)
+        return self.ax.plot_surface(x, y, matrix, alpha = 0.6, cmap = cm.coolwarm, linewidth = 0.4)
     
     
 

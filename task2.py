@@ -255,7 +255,7 @@ w = 1.0
             
 
 
-plotter = VolPlotter('LaplasGZ', 'x', 'y')    
+plotter = VolPlotter('Gauss', 'x', 'y')    
         
 solveGZ = poisson(a,b,1,mxp,5000,lem,rem,upm,dnm,0.01,plotter)
 

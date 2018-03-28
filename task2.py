@@ -238,6 +238,94 @@ class fd:
         
         return ey
     
+class poisson2:
+    
+    def __init__(self,M,N,cell,density,iterations,ledge,redge,up,down,nedge,Epsilon,plotter):
+        
+        self.n = N
+        
+        self.m = M
+        
+        self.c=cell
+        
+        self.dp=density
+        
+        self.ir=iterations
+        
+        self.le=ledge
+        
+        self.re=redge
+        
+        self.up=up
+        
+        self.dn=down
+        
+        self.eps=Epsilon
+        
+        self.plotter=plotter
+        
+        self.ne=nedge
+        
+        
+    def Jacoby(self):
+        
+        x=np.linspace(0.,self.n*self.c,self.n)
+        
+        y=np.linspace(0.,self.m*self.c,self.m)
+        
+        A=np.zeros((self.m, self.n))
+        
+        A=self.ne
+        
+        A[0,:]=self.up
+        
+        A[-1,:]=self.dn
+        
+        A[:,0]=self.le
+        
+        A[:,-1]=self.re
+        
+        for i in range(self.ir):
+            
+            B=0.25*( A[0:-2,1:-1] + A[1:-1,0:-2] + A[1:-1,2:] + A[2:,1:-1])+np.pi*self.dp[1:-1,1:-1]*self.c**2
+            A[1:-1,1:-1]=B
+            A[15:-15,19:21]=100.
+            A[15:-15,-21:-19]=-100.
+        
+        plotter.plot(x,y,A)
+        
+        return (A)
+
+
+class densityofcharge: 
+                
+    def __init__(self,M,N,pot,cell,plotter):
+        
+        self.n = N
+        
+        self.m = M
+        
+        self.U = pot
+        
+        self.c = cell
+        
+        self.plotter = plotter
+        
+    def density(self):
+        
+        A = self.U
+        
+        d = (A[1:-1,1:-1] - 0.25*(A[0:-2,1:-1] + A[1:-1,0:-2] + A[1:-1,2:] + A[2:,1:-1]))/(np.pi*self.c**2)
+        
+        x = np.linspace(0.,self.n*self.c,self.n-2)
+        
+        y = np.linspace(0.,self.m*self.c,self.m-2)
+        
+        plotter.plot(x,y,d)
+        
+        return d
+
+
 a = 100
 b = 100
 
@@ -341,5 +429,38 @@ plotter = VolPlotter('EY', 'x', 'y')
 field = fd(a,b,Z4,1,plotter)
 
 ey = field.EY()
+
+plotter.show()
+
+
+upm = np.zeros(b)
+
+dnm = np.zeros(b)
+
+lem = np.zeros(a)
+
+rem = np.zeros(a)
+
+mxp = np.zeros((a,b))
+
+U1 = np.zeros((a,b))
+
+U1[15:-15,19:21] = 100.
+
+U1[15:-15,-21:-19] = -100.
+
+plotter = VolPlotter('Capacity', 'x', 'y')
+
+solveL = poisson2(a,b,1,mxp,10000,lem,rem,upm,dnm,U1,0.01,plotter)
+
+Z6 = solveL.Jacoby()
+
+plotter.show()
+
+plotter = VolPlotter('Charge', 'x', 'y')
+
+ch = densityofcharge(a,b,Z6,1,plotter)
+
+fin = ch.density()
 
 plotter.show()
